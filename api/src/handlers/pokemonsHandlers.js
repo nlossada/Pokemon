@@ -8,6 +8,7 @@ const { getPokesController, getPokesByQueryController, getPokeByIdController, po
 //*   Maneja el error (try/catch)
 //*   Dar la respuesta
 
+
 //* Controller
 //*   Comunicación con el exterior (BBDD ó API externa)
 //*   Devolver información o un error

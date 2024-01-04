@@ -1,0 +1,11 @@
+.containerNav {
+    display: flex;
+    width: auto;
+    height: 4rem;
+    background-color: black;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 1rem;
+}

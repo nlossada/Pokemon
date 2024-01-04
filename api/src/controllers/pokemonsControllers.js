@@ -2,30 +2,40 @@ const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 const { getDataAPI } = require("../utils/getDataApi");
 const { Op } = require("sequelize");
-const { getDataDB } = require("../utils/getDataDB");
+const { getDataDB, getDataDBObject } = require("../utils/getDataDB");
 
 
-
-//GET pokemons, per pages
 const getPokesController = async () => {
-    let allResults = [];
+    const allAPIResults = [];
     let nextUrl = "https://pokeapi.co/api/v2/pokemon";
-    let requestsPages = 0;
-    //insert page, start in 0=page1 -> 5 includes page5
-    while (requestsPages < 5) {
+
+    // Realizar las solicitudes HTTP de manera paralela usando Promise.all
+    while (allAPIResults.length < 300) {
         const { data } = await axios.get(nextUrl);
         const pageResults = data.results;
-        // data.results -> [ {name: , url:...pokemon/id/ } , {name: , url:} ]
 
-        if (!pageResults.length) {
-            throw new Error("No pokemons found");
-        }
-        allResults = [...allResults, ...pageResults];
+        const apiRequests = pageResults.map(async (eachResult) => {
+            const dataAPI = await axios.get(eachResult.url);
+            return getDataAPI(dataAPI.data);
+        });
+
+        const pageAPIResults = await Promise.all(apiRequests);
+        allAPIResults.push(...pageAPIResults);
         nextUrl = data.next;
-        requestsPages++;
     }
-    if (allResults) return allResults;
-    throw new Error("No pokemons found")
+
+    // Consulta de la base de datos
+    const dataDB = await Pokemon.findAll({ include: Type });
+    const allDBResults = getDataDB(dataDB);
+
+    // Combinar los resultados
+    const allResults = [...allAPIResults, ...allDBResults];
+
+    if (allResults.length > 0) {
+        return allResults;
+    }
+
+    throw new Error("No pokemons found");
 };
 
 
@@ -59,11 +69,11 @@ const getPokeByIdController = async (idPokemon) => {
         throw new Error(`No pokemon found on API with id: ${idPokemon}`)
     }
     //else -> id UUID -> DB search
-    const responseDB = await Pokemon.findAll({
+    const responseDB = await Pokemon.findOne({
         where: { id: idPokemon }, include: Type
     })
-    //find all -> [] y estandarizo la data con map y crea objetos idénticos siempre
-    const pokeDB = getDataDB(responseDB)
+    //find all -> [] and filtered data with map in getDataDB
+    const pokeDB = getDataDBObject(responseDB)
     if (pokeDB) return pokeDB
     throw new Error(`No pokemon found on DB with id: ${idPokemon}`)
 }

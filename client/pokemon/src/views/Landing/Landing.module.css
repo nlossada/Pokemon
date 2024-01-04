@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.buttonLanding {
+    align-self: center;
+}

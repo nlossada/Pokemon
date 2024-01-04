@@ -1,6 +1,6 @@
 
 
-//filter data from api pokemons/?name="" = pokemons/idPokemon
+//filter data from object api {} ->  pokemons/?name="" = pokemons/idPokemon - request only to url of one Pokemon
 const getDataAPI = (dataAPI) => {
     //no funciona con las props por -medio:  dataAPI.sprites.other.official - artwork.front_default; 
     let imagePoke = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dataAPI.id}.png`
