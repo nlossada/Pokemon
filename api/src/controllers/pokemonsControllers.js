@@ -10,7 +10,7 @@ const getPokesController = async () => {
     let nextUrl = "https://pokeapi.co/api/v2/pokemon";
 
     // Realizar las solicitudes HTTP de manera paralela usando Promise.all
-    while (allAPIResults.length < 300) {
+    while (allAPIResults.length < 150) {
         const { data } = await axios.get(nextUrl);
         const pageResults = data.results;
 
@@ -43,15 +43,20 @@ const getPokesController = async () => {
 
 const getPokesByQueryController = async (name) => {
     //search query name on DB
-    const responseDB = await Pokemon.findAll({
+    const responseDB = await Pokemon.findOne({
         where: { name: { [Op.iLike]: `%${name}` } }, include: Type
     })
-    const pokesDB = getDataDB(responseDB)
-    if (pokesDB.length > 0) return pokesDB
+    if (responseDB !== null) {
+        const pokeDB = getDataDBObject(responseDB)
+        if (pokeDB.name) return pokeDB
+    }
+
     //search query name on API
     const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    const pokeAPI = getDataAPI(data)
-    if (pokeAPI.name) return pokeAPI
+    if (data !== null) {
+        const pokeAPI = getDataAPI(data)
+        if (pokeAPI.name) return pokeAPI
+    }
 
     throw new Error("No pokemons found in API or DB with query")
 }

@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, CLEAR_POKE_BY_NAME, CREATE_POKEMON, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES } from "./actionType"
+import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE } from "./actionType"
 import axios from "axios"
 
 
@@ -83,10 +83,15 @@ export const getPokeByName = (name) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`http://localhost:3001/pokemons/?name=${name}`)
-            dispatch({
-                type: GET_POKE_BY_NAME,
-                payload: data
-            })
+            if (data && data.id) {
+                dispatch({
+                    type: GET_POKE_BY_NAME,
+                    payload: data
+                })
+            } else {
+                throw new Error("No pokemon found with that name")
+            }
+
         } catch (error) {
             window.alert(error.message)
         }
@@ -97,4 +102,54 @@ export const clearPokeByName = () => {
         type: CLEAR_POKE_BY_NAME,
     }
 }
+
+export const filterByOrigin = (origin) => {
+    return {
+        type: FILTER_BY_ORIGIN,
+        payload: origin
+    }
+}
+
+export const filterByType = (type) => {
+    return {
+        type: FILTER_BY_TYPE,
+        payload: type
+    }
+}
+
+export const clearFiltered = () => {
+    return {
+        type: CLEAR_FILTERED,
+    }
+}
+
+export const setOriginValue = (origin) => {
+    return {
+        type: SET_ORIGIN_VALUE,
+        payload: origin
+    }
+}
+export const setTypeValue = (type) => {
+    return {
+        type: SET_TYPE_VALUE,
+        payload: type
+    }
+}
+
+
+
+export const orderByName = (criteria) => {
+    return {
+        type: ORDER_BY_NAME,
+        payload: criteria
+    }
+}
+
+export const orderByAttack = (criteria) => {
+    return {
+        type: ORDER_BY_ATTACK,
+        payload: criteria
+    }
+}
+
 

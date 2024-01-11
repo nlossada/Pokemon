@@ -1,0 +1,29 @@
+.containerFilter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.containerFilter div {
+    margin: 5px 15px;
+}
+
+.containerFilter label {
+    margin-right: 5px;
+}
+
+.containerFilter button {
+    width: 180px;
+    height: 30px;
+    font-size: 13px;
+    padding: 0px 4px;
+}
+
+.containerFilter select {
+    width: 160px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    font-size: 300;
+    font-family: inherit;
+}

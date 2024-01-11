@@ -1,4 +1,4 @@
-
+import style from "./Pages.module.css"
 
 const Pages = (props) => {
     const { currentPage, cardsPerPage, totalCards, onPageChange } = props
@@ -13,18 +13,18 @@ const Pages = (props) => {
 
 
     return (
-        <div>
-            <button onClick={() => onClickPages(1)}>START</button>
+        <div className={style.buttonPages}>
+            <button onClick={() => onClickPages(1)}>⏮️</button>
             <button
                 onClick={() => onClickPages(currentPage - 1)}
                 disabled={currentPage === 1}
-            >PREVIOUS</button>
+            >◀️</button>
             <span>{currentPage} OF {totalPages}</span>
             <button
                 onClick={() => onClickPages(currentPage + 1)}
                 disabled={currentPage === totalPages}
-            >NEXT</button>
-            <button onClick={() => onClickPages(totalPages)}>END</button>
+            >▶️</button>
+            <button onClick={() => onClickPages(totalPages)}>⏭️</button>
         </div>
 
     )

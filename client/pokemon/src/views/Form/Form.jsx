@@ -11,11 +11,9 @@ const Form = (props) => {
     //types global state - for select options
     const allTypes = useSelector((state) => state.allTypes)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
-    useEffect(() => {
-        dispatch(getTypes())
-    }, [])
+
+
 
 
     //local state for input
@@ -62,21 +60,25 @@ const Form = (props) => {
     }
 
     //form -> select types
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        dispatch(createPokemon(pokeData))
-        setPokeData({
-            name: "",
-            image: "",
-            life: "",
-            attack: "",
-            defense: "",
-            speed: "",
-            height: "",
-            weight: "",
-            TypesId: [],
-        })
-        setShowSuccessPopup(true)
+        try {
+            await dispatch(createPokemon(pokeData))
+            setPokeData({
+                name: "",
+                image: "",
+                life: "",
+                attack: "",
+                defense: "",
+                speed: "",
+                height: "",
+                weight: "",
+                TypesId: [],
+            })
+            setShowSuccessPopup(true)
+        } catch (error) {
+            window.alert("No pokemon created. Please try again")
+        }
     }
 
     //Success pop up

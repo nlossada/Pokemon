@@ -11,8 +11,8 @@ const Card = ({ pokemon }) => {
 
             <div className={style.types}>
                 {
-                    pokemon.types && pokemon.types.map((type) => (
-                        <p>{type}</p>
+                    pokemon.types && pokemon.types.map((type, index) => (
+                        <p key={index}>{type}</p>
                     ))
                 }
             </div>

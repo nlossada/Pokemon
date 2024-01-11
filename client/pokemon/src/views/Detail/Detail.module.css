@@ -4,3 +4,14 @@
     justify-content: space-around;
     align-content: center;
 }
+
+.container img {
+    width: 400px;
+    height: 400px;
+    margin-top: 30px;
+    align-self: center;
+}
+
+.container div {
+    margin-top: 30px;
+}

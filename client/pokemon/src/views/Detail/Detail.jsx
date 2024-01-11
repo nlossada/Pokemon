@@ -20,7 +20,7 @@ const Detail = (props) => {
 
     return (
         <div className={style.container}>
-            <img src={pokeDetail.image} alt="" />
+            <img src={pokeDetail.image} alt={pokeDetail.name} />
             <div>
                 <h2>{pokeDetail.name}</h2>
                 <p>Id: {pokeDetail.id}</p>

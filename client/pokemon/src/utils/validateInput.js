@@ -26,7 +26,7 @@ export const validateInput = (pokeData) => {
     //IMAGE
     if (!pokeData.image.length) errors.image = "You must enter an image link"
     else {
-        if (pokeData.image.length > 500) errors.image = "Image link must be a maximum of 500 characters"
+        // if (pokeData.image.length > 500) errors.image = "Image link must be a maximum of 500 characters"
         if (!regExpImage.test(pokeData.image)) errors.image = "Image must be a link that begins with http"
     }
 

@@ -1,5 +1,5 @@
 import style from './NavBar.module.css'
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 // import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -22,6 +22,8 @@ const NavBar = (props) => {
         dispatch(getPokeByName(nameSearch))
         setNameSearch("")
     }
+    const location = useLocation()
+
     //clear globar state pokeByName to render pokemons at Home's View
     const handleClickHome = (event) => {
         dispatch(clearPokeByName())
@@ -45,11 +47,15 @@ const NavBar = (props) => {
                 </button>
             </div>
 
-            <div>
-                <input type="text" onChange={handleSearch} value={nameSearch} />
-                <button onClick={handleClickSearch}>Search</button>
-            </div>
+            {
+                location.pathname === "/home"
+                    ? (<div>
+                        <input type="text" onChange={handleSearch} value={nameSearch} />
+                        <button onClick={handleClickSearch}>Search</button>
+                    </div>)
+                    : null
 
+            }
 
         </div>
     )
