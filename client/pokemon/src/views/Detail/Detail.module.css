@@ -3,9 +3,9 @@
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
-    background-image: url("../../assets/img/fondogrisgrande.jpg");
-    /* background-size: cover; */
-    background-position: center;
+    width: auto;
+    height: 500px;
+    background-image: url("../../assets/img/fondofiltro.jpg");
     background-repeat: repeat;
 }
 
@@ -14,7 +14,13 @@
     height: 400px;
     margin-top: 30px;
     align-self: center;
+
+    &:hover {
+        transform: scale(1.2);
+
+    }
 }
+
 
 .container div {
     margin-top: 30px;

@@ -168,7 +168,13 @@ const Form = (props) => {
 
             </form>
 
-            <img src="\src\assets\img\pokepikachu.jpg" alt="Pokemon ball" />
+            <div className={style.containerImg}>
+                <img src="\src\assets\img\pica2.jpg" alt="Picachu" />
+                <img src="\src\assets\img\pica1.jpg" alt="Picachu" />
+                <img src="\src\assets\img\pica3.jpg" alt="Picachu" />
+
+            </div>
+
 
 
             {

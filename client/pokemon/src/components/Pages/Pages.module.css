@@ -2,4 +2,13 @@
     font-size: 25px;
     padding: 8px;
     margin: 5px;
+    background-color: #F2E313;
+}
+
+.buttonPages button:hover {
+    border-color: #4B83F2;
+}
+
+.buttonPages {
+    background-color: #F2E313;
 }

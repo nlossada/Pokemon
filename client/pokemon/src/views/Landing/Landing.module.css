@@ -19,8 +19,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    color: white;
+    background-color: rgba(242, 242, 242, 0.8);
+    color: #010D00;
     font-size: 1.5em;
     border: none;
     cursor: pointer;

@@ -1,0 +1,20 @@
+.divContainer {
+    background-image: url("../../assets/img/fondofiltro.jpg");
+    background-repeat: repeat;
+    width: auto;
+    height: 100vh;
+    margin: 0;
+}
+
+.divContainer p {
+    margin: 0;
+    padding: 20px;
+    font-weight: 600;
+    font-size: larger;
+    background-color: rgba(242, 208, 39, 0.9);
+}
+
+.divContainer img {
+    width: 400px;
+    height: 200px;
+}

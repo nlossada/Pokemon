@@ -12,7 +12,7 @@ const Landing = (props) => {
                 Your browser does not support the landing video
             </video>
             <button className={style.buttonLanding}>
-                <Link to="/home"> GO </Link>
+                <Link to="/home"> GO! </Link>
 
             </button>
         </div>

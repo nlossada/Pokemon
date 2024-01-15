@@ -44,9 +44,11 @@ const reducer = (state = initialState, action) => {
             }
         case DELETE_POKEMON:
             const noDeletedPokemons = state.pokemons.filter(pokemon => pokemon.id !== payload)
+            const noDeletedFiltered = state.filteredPokemons.filter(pokemon => pokemon.id !== payload)
             return {
                 ...state,
-                pokemons: noDeletedPokemons
+                pokemons: noDeletedPokemons,
+                filteredPokemons: noDeletedFiltered
             }
         case GET_POKE_BY_NAME:
             return {
