@@ -22,14 +22,26 @@ module.exports = (sequelize) => {
     life: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        min: 1,
+        max: 255
+      }
     },
     attack: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        min: 1,
+        max: 210
+      }
     },
     defense: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        min: 1,
+        max: 250
+      }
     },
     speed: {
       type: DataTypes.INTEGER,

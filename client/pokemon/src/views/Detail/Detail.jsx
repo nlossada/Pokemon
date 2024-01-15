@@ -37,13 +37,13 @@ const Detail = (props) => {
 
                     pokeDetail.weight ? <p>Weight: {pokeDetail.weight}</p> : null
                 }
-                <div>
-                    {
-                        pokeDetail.types && pokeDetail.types.map((type, index) => (
-                            <h4 key={index}>{type}</h4>
-                        ))
-                    }
-                </div>
+                <h4>Types:</h4>
+                {
+                    pokeDetail.types && pokeDetail.types.map((type, index) => (
+                        <p key={index}>{type}</p>
+                    ))
+                }
+
 
 
             </div>

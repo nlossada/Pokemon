@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getPokemons, getTypes } from "../../redux/actions";
 import Pages from "../../components/Pages/Pages";
 import FilterOrder from "../../components/FilterOrder/FilterOrder";
+import style from "./Home.module.css"
 
 
 
@@ -84,7 +85,7 @@ const Home = (props) => {
 
 
     return (
-        <div>
+        <div className={style.container}>
 
             { //loading conditional render
                 isLoading
@@ -109,7 +110,7 @@ const Home = (props) => {
             { //FilterOrder conditional render if nameSearch or loading pokemon
                 isLoading || pokeByNameState.id
                     ? null
-                    : <FilterOrder
+                    : <FilterOrder onPageChange={onPageChange}
                     />
             }
 
@@ -118,6 +119,8 @@ const Home = (props) => {
                     ? null
                     : < Cards pokemonsPerPage={pokemonsPerPage} />
             }
+
+
 
 
         </div>

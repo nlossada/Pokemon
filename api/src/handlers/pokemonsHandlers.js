@@ -1,4 +1,4 @@
-const { getPokesController, getPokesByQueryController, getPokeByIdController, postPokeController } = require("../controllers/pokemonsControllers")
+const { getPokesController, getPokesByQueryController, getPokeByIdController, postPokeController, deletePokemonController } = require("../controllers/pokemonsControllers")
 
 //* Ruta => Llamar al Handler
 
@@ -29,6 +29,9 @@ const getPokeHandler = async (req, res) => {
     }
 }
 
+
+
+
 const getPokeByIdHandler = async (req, res) => {
     try {
         const { idPokemon } = req.params
@@ -38,6 +41,9 @@ const getPokeByIdHandler = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
+
+
 
 const postPokemons = async (req, res) => {
     try {
@@ -52,8 +58,25 @@ const postPokemons = async (req, res) => {
 }
 
 
+
+const deletePokemonHandler = async (req, res) => {
+    try {
+        const { idPokemon } = req.params
+        const pokeDeleted = await deletePokemonController(idPokemon)
+        if (pokeDeleted) {
+            console.log("handler: pokeDeleted" + pokeDeleted)
+            return res.status(200).json({ message: "Pokemon deleted succesfully" })
+        } else {
+            res.status(400).json({ error: "No pokemon found to delete" });
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 module.exports = {
     getPokeHandler,
     getPokeByIdHandler,
     postPokemons,
+    deletePokemonHandler
 }

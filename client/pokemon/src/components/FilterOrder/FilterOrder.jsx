@@ -4,40 +4,35 @@ import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 
 
-const FilterOrder = (props) => {
+const FilterOrder = ({ onPageChange }) => {
 
     const dispatch = useDispatch()
 
     const allTypes = useSelector(state => state.allTypes)
     const isFilteredType = useSelector(state => state.isFilteredType)
     const isFilteredOrigin = useSelector(state => state.isFilteredOrigin)
+    const filteredPokemons = useSelector(state => state.filteredPokemons)
     const isOrdered = useSelector(state => state.isOrdered)
     const originValue = useSelector(state => state.originValue)
     const typeValue = useSelector(state => state.typeValue)
 
     //FILTERS
     //filters selects and handlers
-    // const [originValue, setOriginValue] = useState("default")
-    // const [typeValue, setTypeValue] = useState("default")
-
     const handleFilterOrigin = (event) => {
-        // setOriginValue(event.target.value)
         dispatch(setOriginValue(event.target.value))
     }
     const handleFilterType = (event) => {
-        // setTypeValue(event.target.value)
         dispatch(setTypeValue(event.target.value))
     }
     //filters buttons
     const handleApplyFilters = () => {
+        onPageChange(1)
         dispatch(filterByOrigin(originValue))
         dispatch(filterByType(typeValue))
         setAttackOrderCriteria("default")
         setNameOrderCriteria("default")
     }
     const handleClearFilters = () => {
-        // setOriginValue("default")
-        // setTypeValue("default")
         setAttackOrderCriteria("default")
         setNameOrderCriteria("default")
         dispatch(clearFiltered())
@@ -122,8 +117,7 @@ const FilterOrder = (props) => {
                         id="orderName"
                         onChange={handleNameOrder}
                         value={nameOrderCriteria}
-                    //disable if no value selected or dismount and mount and is filtered already
-                    // disabled={}
+
                     >
                         <option value="default" disabled hidden>Select an option</option>
                         <option value="up">A to Z</option>
@@ -138,8 +132,6 @@ const FilterOrder = (props) => {
                         id="orderAttack"
                         onChange={handleAttackOrder}
                         value={attackOrderCriteria}
-                    //disable if no value selected or dismount and mount and is filtered already
-                    // disabled={}
                     >
                         <option value="default" disabled hidden>Select an option</option>
                         <option value="up">Min to Max</option>
@@ -148,11 +140,20 @@ const FilterOrder = (props) => {
                 </div>
 
             </div>
-            {
+
+            { //conditional render of text filters applied
                 isFilteredOrigin || isFilteredType || isOrdered
-                    ? <p>Filters are applied, clear them to continue</p>
+                    ? <p style={{ color: "grey" }}>Filters or Order are applied, clear them to continue</p>
                     : null
             }
+
+            {
+                isFilteredOrigin && isFilteredType && filteredPokemons.length === 0
+                    ? <p style={{ color: "red", fontSize: "18px" }}>UPS! THERE ARE NO POKEMONS WITH THE FILTERING CRITERIA</p>
+                    : null
+            }
+
+
         </div>
     )
 }

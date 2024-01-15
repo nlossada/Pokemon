@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom"
 
 
 const Form = (props) => {
+    useEffect(() => {
+        dispatch(getTypes())
+    }, [])
     //types global state - for select options
     const allTypes = useSelector((state) => state.allTypes)
     const dispatch = useDispatch()
-
-
-
-
+    const pokemonsState = useSelector(state => state.pokemons)
 
     //local state for input
     const [pokeData, setPokeData] = useState({
@@ -39,7 +39,7 @@ const Form = (props) => {
         speed: "",
         height: "",
         weight: "",
-        TypesId: "",
+        TypesId: "Press Ctrl to select more than one type",
     })
 
     //inputs forms
@@ -47,6 +47,11 @@ const Form = (props) => {
         const { name, value } = event.target
         setPokeData({ ...pokeData, [name]: value })
         setErrors(validateInput({ ...pokeData, [name]: value }))
+        //avoid repeted name
+        const repetedName = pokemonsState.find(pokemon => pokemon.name.toLowerCase() === pokeData.name.toLowerCase())
+        if (repetedName !== undefined) {
+            setErrors({ ...errors, name: "This pokemon name is not available. It already exists" })
+        }
     }
 
     //select types
@@ -59,11 +64,18 @@ const Form = (props) => {
 
     }
 
+    //Success pop up
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false)
+
+    const closeSuccessPopUp = () => {
+        setShowSuccessPopup(false)
+    }
+
     //form -> select types
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
         try {
-            await dispatch(createPokemon(pokeData))
+            dispatch(createPokemon(pokeData))
             setPokeData({
                 name: "",
                 image: "",
@@ -75,18 +87,19 @@ const Form = (props) => {
                 weight: "",
                 TypesId: [],
             })
-            setShowSuccessPopup(true)
         } catch (error) {
             window.alert("No pokemon created. Please try again")
         }
     }
 
-    //Success pop up
-    const [showSuccessPopup, setShowSuccessPopup] = useState(false)
-
-    const closeSuccessPopUp = () => {
-        setShowSuccessPopup(false)
-    }
+    //verify created pokemon to show popup
+    useEffect(() => {
+        const createdPoke = pokemonsState.find(pokemon => pokemon.name.toLowerCase() === pokeData.name.toLowerCase());
+        console.log("createdPoke:", createdPoke);
+        if (createdPoke !== undefined) {
+            setShowSuccessPopup(true);
+        }
+    }, [pokemonsState]);
 
 
 
@@ -144,12 +157,20 @@ const Form = (props) => {
                     }
                 </select>
                 <p>{errors.TypesId ? errors.TypesId : null}</p>
+
+
+
                 <button
                     type="submit"
                     disabled={Object.values(errors).some(error => error && error.length > 0)}
                 >CREATE YOUR POKEMON!</button>
+
+
             </form>
+
             <img src="\src\assets\img\pokepikachu.jpg" alt="Pokemon ball" />
+
+
             {
                 showSuccessPopup
                     ? (<div className={style.successPopUp}>

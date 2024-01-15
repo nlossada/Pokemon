@@ -57,8 +57,8 @@ const getPokesByQueryController = async (name) => {
         const pokeAPI = getDataAPI(data)
         if (pokeAPI.name) return pokeAPI
     }
+    throw new Error("No pokemons found in API or DB with name required")
 
-    throw new Error("No pokemons found in API or DB with query")
 }
 
 
@@ -97,6 +97,16 @@ const postPokeController = async (name, image, life, attack, defense, speed, hei
     throw new Error("No pokemon created, missing data")
 }
 
+const deletePokemonController = async (idPokemon) => {
+    if (isNaN(idPokemon)) {
+        const pokeDeleted = await Pokemon.destroy({ where: { id: idPokemon } })
+        if (pokeDeleted === 1) return true
+    }
+    else {
+        throw new Error("Invalid pokemon id")
+    }
+}
+
 
 
 module.exports = {
@@ -104,4 +114,5 @@ module.exports = {
     getPokesByQueryController,
     getPokeByIdController,
     postPokeController,
+    deletePokemonController
 }

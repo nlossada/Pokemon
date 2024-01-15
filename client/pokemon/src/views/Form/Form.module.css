@@ -27,6 +27,11 @@
     height: 150px;
 }
 
+.container p {
+    margin: 2px;
+    color: rgb(136, 66, 66);
+}
+
 .divContainer img {
     width: 400px;
     height: 400px;

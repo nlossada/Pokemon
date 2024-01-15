@@ -22,6 +22,19 @@ const NavBar = (props) => {
         dispatch(getPokeByName(nameSearch))
         setNameSearch("")
     }
+
+    // const handleClickSearch = async (event) => {
+    //     event.preventDefault()
+    //     if (!nameSearch) window.alert("Must enter a name")
+    //     try {
+    //         await dispatch(getPokeByName(nameSearch))
+    //         setNameSearch("")
+    //     }
+    //     catch (error) {
+    //         window.alert(`No pokemons found with name ${nameSearch}. The search must be exact`)
+    //     }
+    // }
+
     const location = useLocation()
 
     //clear globar state pokeByName to render pokemons at Home's View
@@ -45,6 +58,10 @@ const NavBar = (props) => {
                         to="/form"
                     >Create Pokemon</NavLink>
                 </button>
+            </div>
+
+            <div>
+                <img src="\src\assets\img\logo.jpg" alt="Pokemon Logo" />
             </div>
 
             {

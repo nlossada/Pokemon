@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE } from "./actionType"
+import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, DELETE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE } from "./actionType"
 
 
 const initialState = {
@@ -12,7 +12,6 @@ const initialState = {
     originValue: "default",
     typeValue: "default",
     isOrdered: false,
-    // errors: [], VER COMO SE HACE EL MANEJO DE ERRORES-> AGREGAR Y LIMPIAR EN ESTADO
 }
 
 const reducer = (state = initialState, action) => {
@@ -42,6 +41,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 pokemons: [...state.pokemons, payload],
+            }
+        case DELETE_POKEMON:
+            const noDeletedPokemons = state.pokemons.filter(pokemon => pokemon.id !== payload)
+            return {
+                ...state,
+                pokemons: noDeletedPokemons
             }
         case GET_POKE_BY_NAME:
             return {

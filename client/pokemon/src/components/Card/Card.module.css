@@ -1,14 +1,18 @@
 .container {
-    background-color: rgba(103, 108, 118, 0.8);
-    width: 160px;
-    height: 220px;
+    background-image: url("../../assets/img/fondo10.jpg");
+    background-position-x: right;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: 200px 270px;
+    width: 200px;
+    height: 270px;
     margin: 20px;
-    padding: 5px;
+    padding: 0px;
     border-radius: 15px;
     box-shadow: 0 15px 15px black;
 
     &:hover {
-        box-shadow: 0 20px 20px #e03421;
+        box-shadow: 0 20px 20px #f5402c;
         transform: scale(1.1);
     }
 }
@@ -17,28 +21,42 @@
     line-height: normal;
     font-weight: 500;
     margin: 5px 0px;
+    font-weight: 600;
+    padding-top: 10px;
 
 }
 
 .container img {
     width: 150px;
     height: 150px;
-    margin: 0px;
+    margin: 5px;
     padding: 0px;
+
 
 }
 
 
-.types {
+.containerRow {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 0px;
     padding: 0px;
 
 }
 
-.types p {
-    margin: 0px;
+.containerRow p {
+    margin: 0px 15px;
     padding: 0px;
+    font-weight: 400;
+}
+
+.containerRow button {
+    width: 50px;
+    height: 20px;
+    margin: 5px 2px;
+    padding: 2px;
+    font-size: 12px;
+    border: 1px solid #260101;
+    border-radius: 5px;
 }

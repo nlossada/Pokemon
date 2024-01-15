@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE } from "./actionType"
+import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, DELETE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE } from "./actionType"
 import axios from "axios"
 
 
@@ -11,10 +11,6 @@ export const getPokemons = () => {
                 payload: data
             })
         } catch (error) {
-            //! preguntar para cambiar
-            //ideal, despachar un error y modificar reducer,
-            // creando nuevo case ERROR y nnuevo estado errors{}, si tiene algo, mostrar el error al usuario
-            // limpiar error en cada caso positivo
             window.alert(error.message)
         }
     }
@@ -67,16 +63,19 @@ export const createPokemon = (pokemonData) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post("http://localhost:3001/pokemons", pokemonData)
-            dispatch({
-                type: CREATE_POKEMON,
-                payload: data
-            })
+            if (data) {
+                dispatch({
+                    type: CREATE_POKEMON,
+                    payload: data
+                })
+            } else {
+                throw new Error("Ups! Something went wrong")
+            }
 
         } catch (error) {
-            window.alert(error.message)
+            window.alert("No pokemon created " + error.message)
         }
     }
-
 }
 
 export const getPokeByName = (name) => {
@@ -89,17 +88,34 @@ export const getPokeByName = (name) => {
                     payload: data
                 })
             } else {
-                throw new Error("No pokemon found with that name")
+                throw new Error("Ups! Something went wrong")
             }
 
         } catch (error) {
-            window.alert(error.message)
+            window.alert("No pokemon found with that name.  " + error.message);
         }
     }
 }
+
 export const clearPokeByName = () => {
     return {
         type: CLEAR_POKE_BY_NAME,
+    }
+}
+
+
+export const deletePokemon = (id) => {
+    return async (dispatch) => {
+        try {
+            await axios.delete(`http://localhost:3001/pokemons/${id}`)
+            dispatch({
+                type: DELETE_POKEMON,
+                payload: id
+            })
+
+        } catch (error) {
+            window.alert("No pokemon deleted" + error.message)
+        }
     }
 }
 

@@ -1,3 +1,5 @@
+
+
 export const validateInput = (pokeData) => {
     const errors = {}
     //NAME -> only letters and spaces
@@ -5,16 +7,8 @@ export const validateInput = (pokeData) => {
     const regExpImage = /^https?:\/\//;
     const regExpNumbers = /^[0-9]+$/;
 
-    // name: "You must provide a name",
-    // image: "You must provide a image",
-    // life: "You must provide a number of lives",
-    // attack: "You must provide a number of attack",
-    // defense: "You must provide a number of defense",
-    // speed: "",
-    // height: "",
-    // weight: "",
 
-    // TypesId: "Press Ctrl to select more than one type",
+
     //NAME
     if (!pokeData.name.length) errors.name = "You must provide a name"
     else {
