@@ -1,0 +1,60 @@
+.divContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-image: url("../../assets/img/fondofiltro.jpg");
+    background-repeat: repeat;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: rgba(242, 208, 39, 0.9);
+    padding: 25px;
+}
+
+.container label {
+    display: inline;
+    margin-top: 10px;
+}
+
+.container input {
+    display: inline-block;
+}
+
+.container button {
+    margin-top: 10px;
+}
+
+.container select {
+    height: 150px;
+}
+
+.container p {
+    margin: 2px;
+    color: #f5402c;
+}
+
+.containerImg {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.containerImg img {
+    width: 250px;
+    height: 250px;
+}
+
+.successPopUp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d4edda;
+    padding: 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

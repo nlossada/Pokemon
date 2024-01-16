@@ -77,7 +77,6 @@ const getPokeByIdController = async (idPokemon) => {
     const responseDB = await Pokemon.findOne({
         where: { id: idPokemon }, include: Type
     })
-    //find all -> [] and filtered data with map in getDataDB
     const pokeDB = getDataDBObject(responseDB)
     if (pokeDB) return pokeDB
     throw new Error(`No pokemon found on DB with id: ${idPokemon}`)
@@ -107,6 +106,45 @@ const deletePokemonController = async (idPokemon) => {
     }
 }
 
+const updatePokeController = async (idPokemon, name, image, life, attack, defense, speed, height, weight) => {
+    if (idPokemon) {
+        const updatedProps = await Pokemon.update({
+            name, image, life, attack, defense, speed, height, weight
+        },
+            { where: { id: idPokemon } })
+        if (updatedProps > 0) {
+            const responseUpdated = await Pokemon.findOne({
+                where: { id: idPokemon }
+            })
+            if (responseUpdated) return responseUpdated
+        } else {
+            throw new Error(`No pokemon updated`)
+        }
+    } else {
+        throw new Error(`No pokemon found on DB with id: ${idPokemon}`)
+    }
+}
+
+const getPokeDBByIdController = async (idPokemon) => {
+    const responseDB = await Pokemon.findOne({
+        where: { id: idPokemon }, include: Type
+    })
+    const pokeDB = getDataDBObject(responseDB)
+    if (pokeDB) return pokeDB
+    throw new Error(`No pokemon found on DB with id: ${idPokemon}`)
+}
+// {
+//     "name": "nuevonombre",
+//     "image": "https://tse2.mm.bing.net/th?id=OIP.ijGji_u2yKkShi-O_mwRLwHaJ4&pid=Api&P=0&h=180",
+//     "life": 66,
+//     "attack": 2,
+//     "defense": 32,
+//     "speed": 66,
+//     "height": 4,
+//     "weight": 3,
+//     "TypesId": [1]
+// }
+
 
 
 module.exports = {
@@ -114,5 +152,7 @@ module.exports = {
     getPokesByQueryController,
     getPokeByIdController,
     postPokeController,
-    deletePokemonController
+    deletePokemonController,
+    updatePokeController,
+    getPokeDBByIdController
 }

@@ -14,6 +14,7 @@ const Card = ({ pokemon }) => {
         dispatch(deletePokemon(id))
     }
 
+
     return (
         <div className={style.container}>
             <h3>{pokemon.name.toUpperCase()}</h3>
@@ -36,7 +37,8 @@ const Card = ({ pokemon }) => {
                     ? null
                     : <div className={style.containerRow}>
                         <button onClick={() => handleDelete(pokemon.id)}>Delete</button>
-                        <button>Update</button>
+                        <button>
+                            <Link to={`/formupdate/${pokemon.id}`}>Update</Link></button>
                     </div>
             }
 

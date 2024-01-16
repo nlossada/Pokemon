@@ -13,7 +13,7 @@ export const validateInput = (pokeData) => {
     if (!pokeData.name.length) errors.name = "You must provide a name"
     else {
         if (pokeData.name.length < 3) errors.name = "Name must be at least 3 characters"
-        if (pokeData.name.length > 11) errors.name = "Name must be a maximum of 10 characters"
+        if (pokeData.name.length > 15) errors.name = "Name must be a maximum of 15 characters"
         if (!regExpName.test(pokeData.name)) errors.name = "Name can only contain letters and spaces"
     }
 

@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, DELETE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE } from "./actionType"
+import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, DELETE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE, UPDATE_POKEMON } from "./actionType"
 import axios from "axios"
 
 
@@ -118,6 +118,28 @@ export const deletePokemon = (id) => {
         }
     }
 }
+
+export const updatePokemon = (id, pokemonData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3001/pokemons/${id}`, pokemonData)
+            if (data) {
+                dispatch({
+                    type: UPDATE_POKEMON,
+                    payload: data
+                })
+            } else {
+                throw new Error("Ups! Something went wrong")
+            }
+
+        } catch (error) {
+            window.alert("No pokemon created " + error.message)
+        }
+    }
+
+}
+
+
 
 export const filterByOrigin = (origin) => {
     return {

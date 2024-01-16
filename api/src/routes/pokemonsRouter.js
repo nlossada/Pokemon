@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getPokeHandler, getPokeByIdHandler, postPokemons, deletePokemonHandler } = require("../handlers/pokemonsHandlers")
+const { getPokeHandler, getPokeByIdHandler, postPokemons, deletePokemonHandler, updatePokeHandler } = require("../handlers/pokemonsHandlers")
 
 const pokemonsRouter = Router();
 
@@ -12,6 +12,8 @@ pokemonsRouter.get("/:idPokemon", getPokeByIdHandler);
 pokemonsRouter.post("/", postPokemons);
 
 pokemonsRouter.delete("/:idPokemon", deletePokemonHandler)
+
+pokemonsRouter.put("/:idPokemon", updatePokeHandler)
 
 module.exports = {
     pokemonsRouter

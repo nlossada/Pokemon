@@ -1,34 +1,38 @@
-import style from "./Form.module.css"
+import style from "./FormUpdate.module.css"
 import { useEffect, useState } from "react"
-import { createDispatchHook, useDispatch, useSelector } from 'react-redux'
-import { createPokemon, getDetail, getTypes } from "../../redux/actions"
+import { useDispatch, useSelector } from 'react-redux'
+import { createPokemon, getDetail, getTypes, updatePokemon } from "../../redux/actions"
 import { validateInput } from "../../utils/validateInput"
 import { validateSelect } from "../../utils/validateSelect"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 
-const Form = (props) => {
+const FormUpdate = (props) => {
 
     useEffect(() => {
         dispatch(getTypes())
     }, [])
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     //types global state - for select options
     const allTypes = useSelector((state) => state.allTypes)
     const pokemonsState = useSelector(state => state.pokemons)
 
+    //id for update
+    const { id } = useParams();
+    const pokeToUpdate = pokemonsState.find((pokemon) => pokemon.id === id)
     //local state for input
     const [pokeData, setPokeData] = useState({
-        name: "",
-        image: "",
-        life: "",
-        attack: "",
-        defense: "",
-        speed: "",
-        height: "",
-        weight: "",
+        name: pokeToUpdate.name,
+        image: pokeToUpdate.image,
+        life: pokeToUpdate.life,
+        attack: pokeToUpdate.attack,
+        defense: pokeToUpdate.defense,
+        speed: pokeToUpdate.speed,
+        height: pokeToUpdate.height,
+        weight: pokeToUpdate.weight,
         TypesId: [],
     })
 
@@ -42,26 +46,15 @@ const Form = (props) => {
         speed: "",
         height: "",
         weight: "",
-        TypesId: "Press Ctrl to select more than one type",
+        TypesId: "Must select at least one type. Press Ctrl to select two types",
     })
 
+    //inputs forms
     const handleChange = (event) => {
-        const { name, value } = event.target;
-
-        setPokeData((prevData) => {
-            const updatedData = { ...prevData, [name]: value };
-
-            setErrors(validateInput(updatedData));
-
-            // avoid repeted names
-            const repetedName = pokemonsState.find(pokemon => pokemon.name.toLowerCase() === updatedData.name.toLowerCase());
-            if (repetedName !== undefined) {
-                setErrors({ ...errors, name: "This pokemon name is not available. It already exists" });
-            }
-            return updatedData;
-        });
-    };
-
+        const { name, value } = event.target
+        setPokeData({ ...pokeData, [name]: value })
+        setErrors(validateInput({ ...pokeData, [name]: value }))
+    }
 
     //select types
     const handleSelectChange = (event) => {
@@ -80,12 +73,16 @@ const Form = (props) => {
         setShowSuccessPopup(false)
     }
 
+    const clickToDetail = () => {
+        navigate(`/detail/${id}`)
+    }
+
 
     //form -> select types
     const handleSubmit = (event) => {
         event.preventDefault()
         try {
-            dispatch(createPokemon(pokeData))
+            dispatch(updatePokemon(id, pokeData))
             setPokeData({
                 name: "",
                 image: "",
@@ -96,26 +93,20 @@ const Form = (props) => {
                 height: "",
                 weight: "",
                 TypesId: [],
-
             })
             setShowSuccessPopup(true)
-
         } catch (error) {
-            window.alert("No pokemon created. Please try again")
+            window.alert("No pokemon updated. Please try again")
         }
     }
 
 
-
-
-
-
     return (
         <div className={style.divContainer}>
-
             <form onSubmit={handleSubmit} className={style.container}>
 
-                <h2>CREATE POKEMON</h2>
+                <h2>UPDATE POKEMON</h2>
+                <h3>ID: {id}</h3>
 
                 <label htmlFor="name"> Name: </label>
                 <input type="text" id="name" key="name" name="name" value={pokeData.name} onChange={handleChange} />
@@ -172,7 +163,7 @@ const Form = (props) => {
                 <button
                     type="submit"
                     disabled={Object.values(errors).some(error => error && error.length > 0)}
-                >CREATE YOUR POKEMON!</button>
+                >UPDATE YOUR POKEMON!</button>
 
 
             </form>
@@ -185,13 +176,13 @@ const Form = (props) => {
             </div>
 
 
-
             {
                 showSuccessPopup
                     ? (<div className={style.successPopUp}>
                         <p>✅</p>
                         <p>POKEMON CREATED SUCCESSFULLY</p>
                         <button onClick={closeSuccessPopUp}>Close</button>
+                        <button onClick={clickToDetail}>Go to detail</button>
                     </div>)
                     : null
             }
@@ -201,4 +192,4 @@ const Form = (props) => {
     )
 }
 
-export default Form
+export default FormUpdate

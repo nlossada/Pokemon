@@ -12,8 +12,7 @@
 .container img {
     width: 400px;
     height: 400px;
-    margin-top: 30px;
-    align-self: center;
+    margin-top: 40px;
 
     &:hover {
         transform: scale(1.2);
@@ -23,7 +22,7 @@
 
 
 .container div {
-    margin-top: 30px;
+    margin-top: 40px;
     background-image: url("../../assets/img/fondoInvertido.jpg");
     background-position-x: right;
     background-position-y: bottom;
@@ -31,7 +30,6 @@
     background-size: 550px 650px;
     width: 350px;
     height: 400px;
-    margin: 20px;
     border-radius: 15px;
     box-shadow: 0 15px 15px black;
 
@@ -39,8 +37,13 @@
 
 .container p {
     margin: 4px;
+    padding-left: 120px;
+    text-align: left;
 }
 
-.container h4 {
-    margin: 6px;
+.container h4,
+.container h2 {
+    margin: 6px 4px;
+    padding-left: 120px;
+    text-align: left;
 }

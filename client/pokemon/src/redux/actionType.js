@@ -1,11 +1,16 @@
-export const GET_POKEMONS = "GET_POKEMONS";
-export const GET_DETAIL = "GET_DETAIL";
-export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_TYPES = "GET_TYPES"
-export const CREATE_POKEMON = "CREATE_POKEMON"
-export const DELETE_POKEMON = "DELETE_POKEMON"
+
+export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKE_BY_NAME = "GET_POKE_BY_NAME"
 export const CLEAR_POKE_BY_NAME = "CLEAR_POKE_BY_NAME"
+export const GET_DETAIL = "GET_DETAIL";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
+
+export const CREATE_POKEMON = "CREATE_POKEMON"
+export const DELETE_POKEMON = "DELETE_POKEMON"
+export const UPDATE_POKEMON = "UPDATE_POKEMON"
+
+
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN"
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE"
 export const CLEAR_FILTERED = "CLEAR_FILTERED"

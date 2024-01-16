@@ -3,6 +3,7 @@
     padding: 8px;
     margin: 5px;
     background-color: #F2E313;
+    ;
 }
 
 .buttonPages button:hover {
@@ -11,4 +12,5 @@
 
 .buttonPages {
     background-color: #F2E313;
+    border-bottom: 2px solid black;
 }

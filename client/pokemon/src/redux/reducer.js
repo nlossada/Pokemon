@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, DELETE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE } from "./actionType"
+import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, DELETE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE, UPDATE_POKEMON } from "./actionType"
 
 
 const initialState = {
@@ -6,6 +6,7 @@ const initialState = {
     pokeDetail: "",
     allTypes: [],
     pokeByName: "",
+    pokeUpdated: "",
     filteredPokemons: [],
     isFilteredOrigin: false,
     isFilteredType: false,
@@ -49,6 +50,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 pokemons: noDeletedPokemons,
                 filteredPokemons: noDeletedFiltered
+            }
+        case UPDATE_POKEMON:
+            return {
+                ...state,
+                pokeUpdated: payload,
             }
         case GET_POKE_BY_NAME:
             return {

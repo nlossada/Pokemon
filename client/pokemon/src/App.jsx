@@ -7,6 +7,7 @@ import Home from './views/Home/Home'
 import Detail from './views/Detail/Detail'
 import Form from './views/Form/Form'
 import NotFound from './views/NotFound/NotFound'
+import FormUpdate from './views/FormUpdate/FormUpdate'
 
 
 
@@ -35,6 +36,10 @@ const App = () => {
         <Route
           path='/form'
           element={<Form />}
+        />
+        <Route
+          path='/formupdate/:id'
+          element={<FormUpdate />}
         />
         <Route
           path='*'

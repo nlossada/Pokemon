@@ -1,4 +1,4 @@
-const { getPokesController, getPokesByQueryController, getPokeByIdController, postPokeController, deletePokemonController } = require("../controllers/pokemonsControllers")
+const { getPokesController, getPokesByQueryController, getPokeByIdController, postPokeController, deletePokemonController, updatePokeController, getPokeDBByIdController } = require("../controllers/pokemonsControllers")
 
 //* Ruta => Llamar al Handler
 
@@ -70,13 +70,38 @@ const deletePokemonHandler = async (req, res) => {
             res.status(400).json({ error: "No pokemon found to delete" });
         }
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 }
+
+const updatePokeHandler = async (req, res) => {
+    try {
+        const { idPokemon } = req.params
+        const { TypesId, name, image, life, attack, defense, speed, height, weight } = req.body;
+
+        const pokeUpdated = await updatePokeController(idPokemon, name, image, life, attack, defense, speed, height, weight)
+        if (pokeUpdated) {
+            if (TypesId && TypesId.length > 0) {
+                //delete the types to the pokemon table instance (response controller) and add new ones
+                await pokeUpdated.setTypes([])
+                await pokeUpdated.addTypes(TypesId)
+            }
+            //GET POKE -> add Types to response
+            const pokeUpdatedTypes = await getPokeDBByIdController(idPokemon)
+            if (pokeUpdatedTypes) return res.status(200).json(pokeUpdatedTypes)
+        } else {
+            res.status(400).json({ error: "No pokemon updated" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 
 module.exports = {
     getPokeHandler,
     getPokeByIdHandler,
     postPokemons,
-    deletePokemonHandler
+    deletePokemonHandler,
+    updatePokeHandler,
 }
