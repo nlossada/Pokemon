@@ -4,7 +4,6 @@ import { createDispatchHook, useDispatch, useSelector } from 'react-redux'
 import { createPokemon, getDetail, getTypes } from "../../redux/actions"
 import { validateInput } from "../../utils/validateInput"
 import { validateSelect } from "../../utils/validateSelect"
-import { useNavigate } from "react-router-dom"
 
 
 const Form = (props) => {
@@ -34,11 +33,11 @@ const Form = (props) => {
 
     //local state errors
     const [errors, setErrors] = useState({
-        name: "",
-        image: "",
-        life: "",
-        attack: "",
-        defense: "",
+        name: "Enter a name",
+        image: "Enter an image link",
+        life: "Enter a number of lives",
+        attack: "Enter a number of attack",
+        defense: "Enter a number of defense",
         speed: "",
         height: "",
         weight: "",
@@ -69,7 +68,7 @@ const Form = (props) => {
             .filter((option) => option.selected)
             .map((selected) => selected.value)
         setPokeData({ ...pokeData, TypesId: selectedTypes })
-        setErrors(validateSelect({ ...pokeData, TypesId: selectedTypes }))
+        setErrors({ ...errors, TypesId: validateSelect({ ...pokeData, TypesId: selectedTypes }) })
 
     }
 
@@ -78,6 +77,7 @@ const Form = (props) => {
 
     const closeSuccessPopUp = () => {
         setShowSuccessPopup(false)
+
     }
 
 
@@ -104,8 +104,6 @@ const Form = (props) => {
             window.alert("No pokemon created. Please try again")
         }
     }
-
-
 
 
 

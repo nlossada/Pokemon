@@ -6,5 +6,5 @@ export const validateSelect = (pokeData) => {
     else {
         if (pokeData.TypesId.length > 2) errors.TypesId = "You must select two types at most"
     }
-    return errors
+    return errors.TypesId
 }

@@ -117,6 +117,7 @@ const FilterOrder = ({ onPageChange }) => {
                         id="orderName"
                         onChange={handleNameOrder}
                         value={nameOrderCriteria}
+                        disabled={isFilteredOrigin && isFilteredType && filteredPokemons.length === 0}
 
                     >
                         <option value="default" disabled hidden>Select an option</option>
@@ -132,6 +133,7 @@ const FilterOrder = ({ onPageChange }) => {
                         id="orderAttack"
                         onChange={handleAttackOrder}
                         value={attackOrderCriteria}
+                        disabled={isFilteredOrigin && isFilteredType && filteredPokemons.length === 0}
                     >
                         <option value="default" disabled hidden>Select an option</option>
                         <option value="up">Min to Max</option>
@@ -143,7 +145,7 @@ const FilterOrder = ({ onPageChange }) => {
 
             { //conditional render of text filters applied
                 isFilteredOrigin || isFilteredType || isOrdered
-                    ? <p style={{ color: "grey" }}>Filters or Order are applied, clear them to continue</p>
+                    ? <p style={{ color: "red", fontSize: "18px" }}>Filters or Order are applied, clear them to continue</p>
                     : null
             }
 

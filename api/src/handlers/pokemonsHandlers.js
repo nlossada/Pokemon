@@ -1,17 +1,7 @@
 const { getPokesController, getPokesByQueryController, getPokeByIdController, postPokeController, deletePokemonController, updatePokeController, getPokeDBByIdController } = require("../controllers/pokemonsControllers")
 
-//* Ruta => Llamar al Handler
-
-//* Handler
-//*   Recibir y desestructurar información
-//*   Invoca al controlador
-//*   Maneja el error (try/catch)
-//*   Dar la respuesta
 
 
-//* Controller
-//*   Comunicación con el exterior (BBDD ó API externa)
-//*   Devolver información o un error
 
 //same handler - different controllers: for "/" -> pokemons and query name
 const getPokeHandler = async (req, res) => {
@@ -64,7 +54,7 @@ const deletePokemonHandler = async (req, res) => {
         const { idPokemon } = req.params
         const pokeDeleted = await deletePokemonController(idPokemon)
         if (pokeDeleted) {
-            console.log("handler: pokeDeleted" + pokeDeleted)
+            // console.log("handler: pokeDeleted" + pokeDeleted)
             return res.status(200).json({ message: "Pokemon deleted succesfully" })
         } else {
             res.status(400).json({ error: "No pokemon found to delete" });
@@ -73,6 +63,8 @@ const deletePokemonHandler = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
+
 
 const updatePokeHandler = async (req, res) => {
     try {

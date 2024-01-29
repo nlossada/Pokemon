@@ -17,23 +17,12 @@ const NavBar = (props) => {
     }
 
     const handleClickSearch = (event) => {
-        if (!nameSearch) window.alert("Must enter a name")
+        if (!nameSearch) return window.alert("Must enter a name")
         event.preventDefault()
         dispatch(getPokeByName(nameSearch))
         setNameSearch("")
     }
 
-    // const handleClickSearch = async (event) => {
-    //     event.preventDefault()
-    //     if (!nameSearch) window.alert("Must enter a name")
-    //     try {
-    //         await dispatch(getPokeByName(nameSearch))
-    //         setNameSearch("")
-    //     }
-    //     catch (error) {
-    //         window.alert(`No pokemons found with name ${nameSearch}. The search must be exact`)
-    //     }
-    // }
 
     const location = useLocation()
 
@@ -56,7 +45,8 @@ const NavBar = (props) => {
                 <button>
                     <NavLink
                         to="/form"
-                    >Create Pokemon</NavLink>
+                        style={({ isActive }) => isActive ? { color: "gray" } : null}
+                    > Create Pokemon </NavLink>
                 </button>
             </div>
 
@@ -67,7 +57,7 @@ const NavBar = (props) => {
             {
                 location.pathname === "/home"
                     ? (<div>
-                        <input type="text" onChange={handleSearch} value={nameSearch} />
+                        <input type="text" onChange={handleSearch} value={nameSearch} placeholder="Enter a name" />
                         <button onClick={handleClickSearch}>Search</button>
                     </div>)
                     : null

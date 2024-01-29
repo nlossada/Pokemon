@@ -14,17 +14,23 @@ const Pages = (props) => {
 
     return (
         <div className={style.buttonPages}>
-            <button onClick={() => onClickPages(1)}>⏮️</button>
+            <button
+                onClick={() => onClickPages(1)}
+                disabled={currentPage === 1}
+            >⏮️</button>
             <button
                 onClick={() => onClickPages(currentPage - 1)}
                 disabled={currentPage === 1}
             >◀️</button>
-            <span>{currentPage} OF {totalPages}</span>
+            <span>{currentPage} OF {totalPages === 0 ? 1 : totalPages}</span>
             <button
                 onClick={() => onClickPages(currentPage + 1)}
                 disabled={currentPage === totalPages}
             >▶️</button>
-            <button onClick={() => onClickPages(totalPages)}>⏭️</button>
+            <button
+                onClick={() => onClickPages(totalPages)}
+                disabled={currentPage === totalPages}
+            >⏭️</button>
         </div>
 
     )

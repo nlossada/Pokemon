@@ -62,7 +62,7 @@ const FormUpdate = (props) => {
             .filter((option) => option.selected)
             .map((selected) => selected.value)
         setPokeData({ ...pokeData, TypesId: selectedTypes })
-        setErrors(validateSelect({ ...pokeData, TypesId: selectedTypes }))
+        setErrors(({ ...errors, TypesId: validateSelect({ ...pokeData, TypesId: selectedTypes }) }))
 
     }
 
@@ -180,7 +180,7 @@ const FormUpdate = (props) => {
                 showSuccessPopup
                     ? (<div className={style.successPopUp}>
                         <p>✅</p>
-                        <p>POKEMON CREATED SUCCESSFULLY</p>
+                        <p>POKEMON UPDATED SUCCESSFULLY</p>
                         <button onClick={closeSuccessPopUp}>Close</button>
                         <button onClick={clickToDetail}>Go to detail</button>
                     </div>)

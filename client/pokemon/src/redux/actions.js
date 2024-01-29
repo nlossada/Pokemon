@@ -69,11 +69,11 @@ export const createPokemon = (pokemonData) => {
                     payload: data
                 })
             } else {
-                throw new Error("Ups! Something went wrong")
+                throw new Error("Ups! Something went wrong. ")
             }
 
         } catch (error) {
-            window.alert("No pokemon created " + error.message)
+            window.alert("No pokemon created. " + error.message)
         }
     }
 }
@@ -88,11 +88,11 @@ export const getPokeByName = (name) => {
                     payload: data
                 })
             } else {
-                throw new Error("Ups! Something went wrong")
+                throw new Error("Ups! Something went wrong. ")
             }
 
         } catch (error) {
-            window.alert("No pokemon found with that name.  " + error.message);
+            window.alert("No pokemon found with that name. The search must be exact. " + error.message);
         }
     }
 }
@@ -114,7 +114,7 @@ export const deletePokemon = (id) => {
             })
 
         } catch (error) {
-            window.alert("No pokemon deleted" + error.message)
+            window.alert("No pokemon deleted " + error.message)
         }
     }
 }
@@ -133,7 +133,7 @@ export const updatePokemon = (id, pokemonData) => {
             }
 
         } catch (error) {
-            window.alert("No pokemon created " + error.message)
+            window.alert("No pokemon created. " + error.message)
         }
     }
 

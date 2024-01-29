@@ -28,3 +28,14 @@ conn.sync({ force: false }).then(() => {
     // console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
+
+
+// server.listen(PORT, async () => {
+//     try {
+//         await conn.sync({ force: false })
+//         console.log(`Server listening on http://localhost:${PORT}`)
+//     }
+//     catch (error) {
+//         console.log(error.message)
+//     }
+// })
