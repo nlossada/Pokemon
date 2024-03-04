@@ -1,11 +1,12 @@
 import { CLEAR_DETAIL, CLEAR_FILTERED, CLEAR_POKE_BY_NAME, CREATE_POKEMON, DELETE_POKEMON, FILTER_BY_ORIGIN, FILTER_BY_TYPE, GET_DETAIL, GET_POKEMONS, GET_POKE_BY_NAME, GET_TYPES, ORDER_BY_ATTACK, ORDER_BY_NAME, SET_ORIGIN_VALUE, SET_TYPE_VALUE, UPDATE_POKEMON } from "./actionType"
 import axios from "axios"
+const URL_API = import.meta.env.VITE_URL_API;
 
 
 export const getPokemons = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get("http://localhost:3001/pokemons")
+            const { data } = await axios.get(`${URL_API}/pokemons`)
             dispatch({
                 type: GET_POKEMONS,
                 payload: data
@@ -22,7 +23,7 @@ export const getPokemons = () => {
 export const getDetail = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/pokemons/${id}`)
+            const { data } = await axios.get(`${URL_API}/pokemons/${id}`)
             dispatch({
                 type: GET_DETAIL,
                 payload: data
@@ -46,7 +47,7 @@ export const clearDetail = () => {
 export const getTypes = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get("http://localhost:3001/types")
+            const { data } = await axios.get(`${URL_API}/types`)
             dispatch({
                 type: GET_TYPES,
                 payload: data
@@ -62,7 +63,7 @@ export const getTypes = () => {
 export const createPokemon = (pokemonData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post("http://localhost:3001/pokemons", pokemonData)
+            const { data } = await axios.post(`${URL_API}/pokemons`, pokemonData)
             if (data) {
                 dispatch({
                     type: CREATE_POKEMON,
@@ -81,7 +82,7 @@ export const createPokemon = (pokemonData) => {
 export const getPokeByName = (name) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/pokemons/?name=${name}`)
+            const { data } = await axios.get(`${URL_API}/pokemons/?name=${name}`)
             if (data && data.id) {
                 dispatch({
                     type: GET_POKE_BY_NAME,
@@ -107,7 +108,7 @@ export const clearPokeByName = () => {
 export const deletePokemon = (id) => {
     return async (dispatch) => {
         try {
-            await axios.delete(`http://localhost:3001/pokemons/${id}`)
+            await axios.delete(`${URL_API}/pokemons/${id}`)
             dispatch({
                 type: DELETE_POKEMON,
                 payload: id
@@ -122,7 +123,7 @@ export const deletePokemon = (id) => {
 export const updatePokemon = (id, pokemonData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/pokemons/${id}`, pokemonData)
+            const { data } = await axios.put(`${URL_API}/pokemons/${id}`, pokemonData)
             if (data) {
                 dispatch({
                     type: UPDATE_POKEMON,
