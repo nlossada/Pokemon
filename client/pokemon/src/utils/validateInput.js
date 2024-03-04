@@ -25,7 +25,7 @@ export const validateInput = (pokeData) => {
     }
 
     //LIFE
-    if (!pokeData.life.length) errors.life = "You must provide a number of lives"
+    if (pokeData.life === undefined || pokeData.life === null) errors.life = "You must provide a number of lives"
     else {
         if (!regExpNumbers.test(pokeData.life)) errors.life = "You must enter only whole numbers"
         if (pokeData.life <= 0) errors.life = "Life must be greater than zero"
@@ -33,14 +33,14 @@ export const validateInput = (pokeData) => {
 
     }
     //ATTACK
-    if (!pokeData.attack.length) errors.attack = "You must provide a number for attacks"
+    if (pokeData.attack === undefined || pokeData.attack === null) errors.attack = "You must provide a number for attacks"
     else {
         if (!regExpNumbers.test(pokeData.attack)) errors.attack = "You must enter only whole numbers"
         if (pokeData.attack <= 0) errors.attack = "Attack must be greater than zero"
         if (pokeData.attack > 210) errors.attack = "Attack can have a maximum value of 210"
     }
     //DEFENSE
-    if (!pokeData.defense.length) errors.defense = "You must provide a number for defense"
+    if (pokeData.defense === undefined || pokeData.defense === null) errors.defense = "You must provide a number for defense"
     else {
         if (!regExpNumbers.test(pokeData.defense)) errors.defense = "You must enter only whole numbers"
         if (pokeData.defense <= 0) errors.defense = "Defense must be greater than zero"
