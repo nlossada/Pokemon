@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import style from './Landing.module.css'
+import video from "../../assets/img/video2poke.mp4"
 
 
 const Landing = (props) => {
@@ -8,7 +9,7 @@ const Landing = (props) => {
         <div className={style.container}>
 
             <video autoPlay loop muted className={style.video}>
-                <source src="\src\assets\img\video2poke.mp4" type="video/mp4" />
+                <source src={video} type="video/mp4" />
                 Your browser does not support the landing video
             </video>
             <button className={style.buttonLanding}>
