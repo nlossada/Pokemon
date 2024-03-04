@@ -5,6 +5,7 @@ import { getPokemons, getTypes } from "../../redux/actions";
 import Pages from "../../components/Pages/Pages";
 import FilterOrder from "../../components/FilterOrder/FilterOrder";
 import style from "./Home.module.css"
+import pokemongif from "../../assets/img/pokemonGif.webp"
 
 
 
@@ -90,7 +91,7 @@ const Home = (props) => {
             { //loading conditional render
                 isLoading
                     ? <div>
-                        <img src="\src\assets\img\pokemonGif.webp" alt="loading pokemon" />
+                        <img src={pokemongif} alt="loading pokemon" />
                         <p>Loading...</p>
                     </div>
                     : null

@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { clearPokeByName, getPokeByName } from "../../redux/actions";
+import pokemonLogo from "../../assets/img/logo.jpg"
 
 
 const NavBar = (props) => {
@@ -51,7 +52,7 @@ const NavBar = (props) => {
             </div>
 
             <div>
-                <img src="\src\assets\img\logo.jpg" alt="Pokemon Logo" />
+                <img src={pokemonLogo} alt="Pokemon Logo" />
             </div>
 
             {

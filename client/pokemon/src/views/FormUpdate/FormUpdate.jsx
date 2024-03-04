@@ -5,6 +5,9 @@ import { createPokemon, getDetail, getTypes, updatePokemon } from "../../redux/a
 import { validateInput } from "../../utils/validateInput"
 import { validateSelect } from "../../utils/validateSelect"
 import { useNavigate, useParams } from "react-router-dom"
+import pica2 from "../../assets/img/pica2.jpg"
+import pica1 from "../../assets/img/pica1.jpg"
+import pica3 from "../../assets/img/pica3.jpg"
 
 
 const FormUpdate = (props) => {
@@ -169,9 +172,9 @@ const FormUpdate = (props) => {
             </form>
 
             <div className={style.containerImg}>
-                <img src="\src\assets\img\pica2.jpg" alt="Picachu" />
-                <img src="\src\assets\img\pica1.jpg" alt="Picachu" />
-                <img src="\src\assets\img\pica3.jpg" alt="Picachu" />
+                <img src={pica2} alt="Picachu" />
+                <img src={pica1} alt="Picachu" />
+                <img src={pica3} alt="Picachu" />
 
             </div>
 
