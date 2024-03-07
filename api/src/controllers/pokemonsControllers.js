@@ -10,7 +10,7 @@ const getPokesController = async () => {
     let nextUrl = "https://pokeapi.co/api/v2/pokemon";
 
     // solicitudes HTTP de manera paralela usando Promise.all
-    while (allAPIResults.length < 30) {
+    while (allAPIResults.length < 32) {
         const { data } = await axios.get(nextUrl);
         const pageResults = data.results;
 
